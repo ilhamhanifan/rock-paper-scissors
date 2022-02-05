@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale='paper'.'rock'">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    // ['rock'] rock, ['paper'] paper, ['scissors'] scissor
+    function computerPlay(){
+        return Math.floor(Math.random()*10 % 3)
+    }
+
+    function playRound(playerSelection, computerSelection){
+
+        if (playerSelection == 'rock'){
+            if(computerSelection == 'rock'){
+                return ("Draw! Rock draws Rock")
+            }
+            else if (computerSelection == 'paper') {
+                return ("You Lose! Paper beats Rock")
+            }
+            else {
+                return ("You Win! Rock beats Scissors")
+            }
+        } else if (playerSelection == 'paper'){
+            if(computerSelection == 'rock'){
+                return ("You Win! Paper beats Rock")
+            }
+            else if (computerSelection == 'paper') {
+                return ("Draw! Paper draws Paper")
+            }
+            else {
+                return ("You Lose! Scissors beats Paper")
+            }
+        } else if (playerSelection == 'scissors'){
+            if(computerSelection == 'rock'){
+                return ("You Lose! Rock beats Scissors")
+            }
+            else if (computerSelection == 'paper') {
+                return ("You Win! Scissors draws Paper")
+            }
+            else {
+                return ("Draw! Scissors draws Scissors")
+            }
+        } else {
+            return ("Invalid Input")
+        } 
+    }
+
+    function game(){
+        let playerSelection;
+        let computerSelection;
+        let scorePlayer = 0;
+        let scoreComputer = 0;
+
+        for(let i=0; i<5; i++){
+            computerSelection = computerPlay();
+            playerSelection = prompt("Your Choice>")
+            console.log(playRound(playerSelection, computerSelection));
+        }
+    }
+
+    game()
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
