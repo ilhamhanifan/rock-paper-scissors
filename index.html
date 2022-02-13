@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale='paper'.'rock'">
-    <title>Document</title>
+    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="page">
+        <div class="scoreboard">
+            <h1>Rock-Paper-Scissors</h1>
+            <div class="score">
+                <p class="inline">Player Score&emsp;:&emsp;</p> <p id="playerScore" class="inline">0</p>
+                <br>
+                <p class="inline">AI Score &emsp;&emsp; :&emsp;</p> <p id="computerScore" class="inline">0</p>
+                <p id="matchResult">This is the match result here</p>
+            </div>
+
+        </div>
+        <div class="container">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+    </div>
+
+
 
 <script>
     // ['rock'] rock, ['paper'] paper, ['scissors'] scissor
     function computerPlay(){
-        return Math.floor(Math.random()*10 % 3)
+        let val = Math.floor(Math.random()*10 % 3)
+        switch(val) {
+            case 0:
+                return "rock"
+                break
+            case 1:
+                return "paper"
+                break
+            case 2:
+                return "scissors"
+                break
+            default:
+                return "error"
+       }
     }
 
     function playRound(playerSelection, computerSelection){
@@ -41,7 +75,7 @@
                 return ("You Lose! Rock beats Scissors")
             }
             else if (computerSelection == 'paper') {
-                return ("You Win! Scissors draws Paper")
+                return ("You Win! Scissors beats Paper")
             }
             else {
                 return ("Draw! Scissors draws Scissors")
@@ -50,28 +84,31 @@
             return ("Invalid Input")
         } 
     }
+    let scorePlayer = 0;
+    let scoreComputer = 0;
+    
+    function game(playerSelection){
+        let computerSelection = computerPlay();        
+        result = playRound(playerSelection, computerSelection)
+        console.log(result)
 
-    function game(){
-        let playerSelection;
-        let computerSelection;
-        let scorePlayer = 0;
-        let scoreComputer = 0;
+        document.getElementById("matchResult").innerHTML = result    
+        document.getElementById("playerScore").innerHTML = scorePlayer   
+        document.getElementById("computerScore").innerHTML = scoreComputer  
 
-        for(let i=0; i<5; i++){
-            computerSelection = computerPlay();
-            playerSelection = prompt("Your Choice>")
-            console.log(playRound(playerSelection, computerSelection));
+
+        if(scorePlayer>=5||scoreComputer>=5){
+            let result = scorePlayer==5 ? "Player Wins" : "Computer Wins"
+            document.getElementById("matchResult").innerHTML = result
+            return
+        } else {
+            result.includes("Win") ? scorePlayer += 1 : (result.includes("Lose") ? scoreComputer += 1 : true)
         }
+
     }
-
-    game()
-
-
-
-
-
-
-
+    document.getElementById("rock").addEventListener("click", () => game("rock"))
+    document.getElementById("paper").addEventListener("click", () => game("paper"))
+    document.getElementById("scissors").addEventListener("click", () => game("scissors"))
 
 
 </script>
